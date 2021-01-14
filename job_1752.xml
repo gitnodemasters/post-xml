@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job href="/jobs/1752" product="Elemental Server + Audio Package + HEVC Package" version="2.16.0.407700">
+  <input>
+    <filter_enable>Disable</filter_enable>
+    <no_psi>false</no_psi>
+    <order>1</order>
+    <timecode_source>embedded</timecode_source>
+    <file_input>
+      <certificate_file nil="true"/>
+      <uri>/data/mnt/ShoutFactoryDigital/Digital/_Elemental/Watch Folders/Proxy/2ch Source/EchoesfromaSomberEmpire_Feature_1080_24_FR_2ch_DualMono_121720.mov</uri>
+    </file_input>
+    <name>input_1</name>
+    <video_selector>
+      <color_space>follow</color_space>
+      <extract_alpha>false</extract_alpha>
+      <order>1</order>
+      <program_id nil="true"/>
+      <name>input_1_video_selector_0</name>
+    </video_selector>
+    <audio_selector>
+      <default_selection>true</default_selection>
+      <infer_external_filename>false</infer_external_filename>
+      <order>1</order>
+      <program_selection>1</program_selection>
+      <selector_type>track</selector_type>
+      <track>1, 2</track>
+      <unwrap_smpte337>false</unwrap_smpte337>
+      <name>input_1_audio_selector_0</name>
+    </audio_selector>
+  </input>
+  <timecode_config>
+    <require_initial_timecode>false</require_initial_timecode>
+    <source>embedded</source>
+    <sync_threshold nil="true"/>
+  </timecode_config>
+  <post_process>
+    <delete_source>false</delete_source>
+    <delete_source_dir>false</delete_source_dir>
+    <processed>
+      <uri>/data/mnt/ShoutFactoryDigital/Digital/_Elemental/Watch Folders/Proxy/2ch Source/Completed Source/</uri>
+    </processed>
+  </post_process>
+  <ad_trigger>scte35_splice_insert</ad_trigger>
+  <ad_avail_offset>0</ad_avail_offset>
+  <priority>20</priority>
+  <user_data/>
+  <avsync_enable>true</avsync_enable>
+  <avsync_pad_trim_audio>true</avsync_pad_trim_audio>
+  <stream_assembly>
+    <name>stream_assembly_0</name>
+    <video_description>
+      <afd_signaling>None</afd_signaling>
+      <drop_frame_timecode>false</drop_frame_timecode>
+      <fixed_afd nil="true"/>
+      <force_cpu_encode>false</force_cpu_encode>
+      <height nil="true"/>
+      <insert_chroma_info>false</insert_chroma_info>
+      <insert_color_metadata>true</insert_color_metadata>
+      <respond_to_afd>None</respond_to_afd>
+      <sharpness>50</sharpness>
+      <stretch_to_output>false</stretch_to_output>
+      <timecode_passthrough>true</timecode_passthrough>
+      <vbi_passthrough>false</vbi_passthrough>
+      <width nil="true"/>
+      <h264_settings>
+        <adaptive_quantization>high</adaptive_quantization>
+        <bitrate>5000000</bitrate>
+        <buf_fill_pct nil="true"/>
+        <buf_size nil="true"/>
+        <cabac>true</cabac>
+        <dynamic_sub_gop>false</dynamic_sub_gop>
+        <flicker_aq>false</flicker_aq>
+        <force_field_pictures>false</force_field_pictures>
+        <framerate_denominator nil="true"/>
+        <framerate_follow_source>true</framerate_follow_source>
+        <framerate_numerator nil="true"/>
+        <gop_b_reference>false</gop_b_reference>
+        <gop_closed_cadence>1</gop_closed_cadence>
+        <gop_markers>false</gop_markers>
+        <gop_num_b_frames>2</gop_num_b_frames>
+        <gop_size>90.0</gop_size>
+        <gop_size_units>frames</gop_size_units>
+        <interpolate_frc>false</interpolate_frc>
+        <look_ahead_rate_control>high</look_ahead_rate_control>
+        <max_bitrate>10000000</max_bitrate>
+        <max_qp nil="true"/>
+        <min_buf_occ nil="true"/>
+        <min_i_interval>0</min_i_interval>
+        <min_qp nil="true"/>
+        <num_ref_frames>3</num_ref_frames>
+        <par_denominator nil="true"/>
+        <par_follow_source>true</par_follow_source>
+        <par_numerator nil="true"/>
+        <passes>2</passes>
+        <qp nil="true"/>
+        <repeat_pps>false</repeat_pps>
+        <rp2027_syntax>false</rp2027_syntax>
+        <scene_change_detect>enabled</scene_change_detect>
+        <sei_timecode>false</sei_timecode>
+        <slices>1</slices>
+        <slow_pal>false</slow_pal>
+        <softness nil="true"/>
+        <spatial_aq>true</spatial_aq>
+        <svq>0</svq>
+        <telecine>None</telecine>
+        <temporal_aq>true</temporal_aq>
+        <profile>Main</profile>
+        <rate_control_mode>VBR</rate_control_mode>
+        <interlace_mode>progressive</interlace_mode>
+      </h264_settings>
+      <selected_gpu nil="true"/>
+      <codec>h.264</codec>
+    </video_description>
+    <audio_description>
+      <audio_type>0</audio_type>
+      <follow_input_audio_type>true</follow_input_audio_type>
+      <follow_input_language_code>true</follow_input_language_code>
+      <language_code nil="true"/>
+      <order>1</order>
+      <stream_name nil="true"/>
+      <timecode_passthrough>false</timecode_passthrough>
+      <aac_settings>
+        <ad_broadcaster_mix>false</ad_broadcaster_mix>
+        <align>false</align>
+        <bitrate>192000</bitrate>
+        <coding_mode>2_0</coding_mode>
+        <latm_loas>false</latm_loas>
+        <mpeg2>false</mpeg2>
+        <sample_rate>48000</sample_rate>
+        <profile>LC</profile>
+        <rate_control_mode>CBR</rate_control_mode>
+      </aac_settings>
+      <codec>aac</codec>
+      <audio_source_name>Audio Selector 1</audio_source_name>
+    </audio_description>
+  </stream_assembly>
+  <output_group>
+    <custom_name>file_group</custom_name>
+    <name nil="true"/>
+    <order>1</order>
+    <file_group_settings>
+      <rollover_interval nil="true"/>
+      <destination>
+        <uri>/data/mnt/ShoutFactoryDigital/Digital/_Elemental/Output/</uri>
+      </destination>
+    </file_group_settings>
+    <type>file_group_settings</type>
+    <output>
+      <description nil="true"/>
+      <extension>mp4</extension>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_Proxy</name_modifier>
+      <order>1</order>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <mp4_settings>
+        <ctts_version>0</ctts_version>
+        <include_cslg>false</include_cslg>
+        <insert_freebox>false</insert_freebox>
+        <mp4_major_brand nil="true"/>
+        <progressive_downloading>false</progressive_downloading>
+      </mp4_settings>
+      <stream_assembly_name>stream_assembly_0</stream_assembly_name>
+      <container>mp4</container>
+    </output>
+  </output_group>
+</job>
