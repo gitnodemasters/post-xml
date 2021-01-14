@@ -106,33 +106,37 @@ function getVideos($path)
         }
     }
 
+    
+
     $data['result'] = $paths;
-    echo json_encode($data);
+    // echo json_encode($data);
+    return $paths;
 }
 
-function createJobs($path)
+function getVideoPaths($path)
 {
-    $output_path = $_POST['out_path'];
-    $video_paths = getVideos($path);
+    $connection = ssh2_connect('10.0.2.230', 22);
+    ssh2_auth_password($connection, 'dupdev', '86DLgO');
 
-    $count = count($video_paths);
-    if ($_FILES['preset']['name'] != '') {
-        $xml_str = file_get_contents($_FILES['preset']['tmp_name']);
-        $xml = simplexml_load_string($xml_str, "SimpleXMLElement", LIBXML_NOCDATA);
-        $xml->output_group->file_group_settings->destination->uri = $output_path;
+    $sftp = ssh2_sftp($connection);
+    $sftp_fd = intval($sftp);
 
-        $jobs = [];
-        for ($i = 0; $i < $count; $i++) {
-            $xml->input->file_input->uri = $video_paths[$i];
-            //$xml->asXml();
-            array_push($jobs, postXML1($xml->asXml()));
-            // sleep(3);
+    $paths = [];
+
+    $handle = opendir("ssh2.sftp://$sftp_fd$path");
+    while (false != ($entry = readdir($handle))) {
+        if (preg_match("/\.(mov|mp4|avi)$/", $entry)) {
+            // $entry is in the right format
+            // echo "$path$entry\n";
+            array_push($paths, "$path$entry");
         }
-
-        $data['result'] = $jobs;
-        echo json_encode($data);
-        //echo '<pre>'; echo $xml->output_group->file_group_settings->destination->uri; echo '</pre>';                    
     }
+
+    
+
+    $data['result'] = $paths;
+    echo json_encode($data);
+    // return $paths;
 }
 
 function getPaths($path)
@@ -166,11 +170,11 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
             getPaths($path);
             break;
         case 'getVideos':
-            getVideos($path);
+            getVideoPaths($path);
             break;
-        case 'createJobs':
-            createJobs($path);
-            break;
+        // case 'createJobs':
+        //     createJobs($path);
+        //     break;
             // ...etc...
     }
 }
