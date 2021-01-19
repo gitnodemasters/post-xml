@@ -162,7 +162,7 @@ function createJobs($input_paths)
                 var res = $.parseJSON(output);
                 var cList = $('#parent-list');
                 cList.empty();
-                $.each(res.result, function(key, value) {
+                $.each(res.result_d, function(key, value) {
                     var li = $('<li/>')
                         .addClass('ui-menu-item')
                         .attr('role', 'menuitem')
@@ -171,6 +171,25 @@ function createJobs($input_paths)
                         .addClass('ui-all')
                         .text(value)
                         .appendTo(li);
+                });
+                $.each(res.result_f, function(key, value) {
+                    var li = $('<li/>')
+                        .addClass('ui-menu-item')
+                        .attr('role', 'menuitem')
+                        .appendTo(cList);
+                    var aaa = $('<a/>')
+                        .addClass('ui-all')
+                        .text(value)
+                        .appendTo(li);
+                    var checkbox = $('<input/>')
+                        .attr('type', 'checkbox')
+                        .text(1)
+                        .appendTo(li);
+                        // checkbox.type = "checkbox";
+                        // checkbox.value = 1;
+                        // checkbox.name = "todo[]";
+                        // li.appendChild(checkbox); 
+
                 });
             }
         });

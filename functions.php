@@ -122,19 +122,26 @@ function getVideoPaths($path)
     $sftp_fd = intval($sftp);
 
     $paths = [];
+    $stats = [];
 
     $handle = opendir("ssh2.sftp://$sftp_fd$path");
     while (false != ($entry = readdir($handle))) {
         if (preg_match("/\.(mov|mp4|avi)$/", $entry)) {
             // $entry is in the right format
             // echo "$path$entry\n";
+            
+            $statinfo = ssh2_sftp_stat($sftp, "/".$path.$entry);
+            // echo $statinfo;
+            
             array_push($paths, "$path$entry");
+            array_push($stats, $statinfo);
         }
     }
 
     
 
     $data['result'] = $paths;
+    $data['result_stat'] = $stats;
     echo json_encode($data);
     // return $paths;
 }
@@ -147,18 +154,26 @@ function getPaths($path)
     $sftp = ssh2_sftp($connection);
     $sftp_fd = intval($sftp);
 
-    $paths = [];
+    $paths_directory = [];
+    $paths_file = [];
 
     $handle = opendir("ssh2.sftp://$sftp_fd$path");
     while (false != ($entry = readdir($handle))) {
         if ($entry != '.' && $entry != '..') {
-            $paths[] = $entry;
+            $statinfo = ssh2_sftp_stat($sftp, "/".$path.$entry);
+            if ($statinfo['mode'] >= 16384 && $statinfo['mode'] <= 16895) {     //directory check
+                $paths_directory[] = $entry;
+            } else {                                                            //file check
+                if (preg_match("/\.(mov|mp4|avi)$/", $entry)) {                 //video check
+                    $paths_file[] = $entry;
+                }
+            }
         }
-        // array_push($paths, "$path$entry");
     }
 
     // $paths = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
-    $data['result'] = $paths;
+    $data['result_d'] = $paths_directory;
+    $data['result_f'] = $paths_file;
     echo json_encode($data);
 }
 
